@@ -64,7 +64,7 @@ fade_in_label(greeting_label, greeting_text)
 # Input box for qr code input
 qr_code_label = tk.Label(
     window,
-    text="Input text or URL for conversion here:",
+    text="Input text or link for conversion here:",
     fg="white",
     bg="#2E2E2E",
     font=text_font
