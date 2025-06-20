@@ -1,0 +1,8 @@
+qr-gen/
+|
+├── .gitignore
+├── pyproject.toml
+├── README.md
+|
+├── app.py              # Main application file
+└── qr-gen-logo.png     # Application logo

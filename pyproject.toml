@@ -1,0 +1,31 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qr-gen"
+version = "1.0.0"
+authors = [
+  { name="Adrian Rubio-Punal", email="adrian.rubio.punal@gmail.com" },
+]
+description = "A simple desktop utility to generate and save custom QR codes."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Desktop Environment",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "qrcode[pil]>=7.0"  # Handles both QR code generation and image processing
+]
+
+[project.urls]
+"Homepage" = "https://github.com/adrirubio/qr-gen"
+
+[tool.setuptools]
+py-modules = ["app"]
