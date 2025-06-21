@@ -4,10 +4,10 @@ import tkinter.font as tkFont
 import tkinter.ttk as ttk
 from tkinter.filedialog import asksaveasfile
 from PIL import Image, ImageTk
+import qrcode
 import random
-import time
 
-start_time = time.time()
+current_image = None
 
 # Greeting list
 greetings = [
@@ -30,12 +30,43 @@ greetings = [
 ]
 
 def show_logo():
+    global current_image
     target_height = 140
     aspect_ratio = pil_image.width / pil_image.height
     target_width = int(target_height * aspect_ratio)
 
     resized_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+    current_image = resized_image
     return ImageTk.PhotoImage(resized_image)
+
+def on_generate():
+    global current_image
+    # Generate QR Code
+    data = input.get()
+    if not data.strip():
+        return
+
+    # Generate QR code image
+    qr = qrcode.QRCode(
+        version=None,  # Let it auto-adjust
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=2
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white").convert("RGB")
+
+    fixed_size = (140, 140)
+    img = img.resize(fixed_size, Image.Resampling.LANCZOS)
+
+    # Store the image so it can be saved later
+    current_image = img
+
+    # Convert to ImageTk and update label
+    qr_img_tk = ImageTk.PhotoImage(img)
+    qr_code_label.config(image=qr_img_tk, compound="bottom")
+    qr_code_label.image = qr_img_tk
 
 def on_clear():
     # Remove all text inside of the input widget
@@ -47,13 +78,17 @@ def on_clear():
     )
 
     # Add logo to qr-code label
+    global current_image
+    current_image = pil_image
     qr_code_label.config(image=logo_image, compound="bottom")
     qr_code_label.image = logo_image
-
 
 def on_save():
     files = [('PNG Image', '*.png'), ('All Files', '*.*')]
     file = asksaveasfile(filetypes=files, defaultextension='.png', mode='wb')
+    if file:
+        current_image.save(file, format='PNG')
+        file.close()
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
@@ -128,7 +163,8 @@ generate_btn = tk.Button(
     height=1,
     relief="raised",
     bd=7,
-    cursor="hand2"
+    cursor="hand2",
+    command=on_generate
 )
 generate_btn.grid(row=4, column=0, pady=20)
 
