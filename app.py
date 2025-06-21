@@ -48,7 +48,7 @@ def on_generate():
 
     # Generate QR code image
     qr = qrcode.QRCode(
-        version=None,  # Let it auto-adjust
+        version=None,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
         box_size=10,
         border=2
@@ -65,22 +65,23 @@ def on_generate():
 
     # Convert to ImageTk and update label
     qr_img_tk = ImageTk.PhotoImage(img)
-    qr_code_label.config(image=qr_img_tk, compound="bottom")
+    qr_code_label.config(text="Here’s your QR code, ready to scan! ", image=qr_img_tk, compound="bottom")
     qr_code_label.image = qr_img_tk
 
 def on_clear():
     # Remove all text inside of the input widget
     input.delete(0, tk.END)
-    # Remove any image inside of the qr-code label
+    # Remove any image and text inside of the qr-code label
     qr_code_label.config(
+        text="",
         image="",
         compound=None
     )
 
-    # Add logo to qr-code label
+    # Add logo and default text to qr-code label
     global current_image
     current_image = pil_image
-    qr_code_label.config(image=logo_image, compound="bottom")
+    qr_code_label.config(image=logo_image, text="Enter your link or text, then generate!", compound="bottom")
     qr_code_label.image = logo_image
 
 def on_save():
@@ -175,16 +176,15 @@ window.grid_rowconfigure(5, weight=1)
 row5.grid_columnconfigure(0, weight=1)
 row5.grid_columnconfigure(1, weight=1)
 
-text="QR Codes will appear here:"
-
 # Create label to display QR codes
 logo_image = show_logo()
+text = "Enter your link or text, then generate!"
 
 qr_code_label = tk.Label(
     row5,
-    text="QR Codes will appear here:",
+    text=text,
     image=logo_image,
-    compound="bottom",  # image above text
+    compound="bottom",
     bg="grey60",
     anchor="n",
     pady=10,
