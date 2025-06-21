@@ -2,6 +2,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 import tkinter.ttk as ttk
+from tkinter.filedialog import asksaveasfile
 from PIL import Image, ImageTk
 import random
 import time
@@ -27,6 +28,32 @@ greetings = [
     "Hey, let's get this QR party started!",
     "Let the creativity flow!",
 ]
+
+def show_logo():
+    target_height = 140
+    aspect_ratio = pil_image.width / pil_image.height
+    target_width = int(target_height * aspect_ratio)
+
+    resized_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+    return ImageTk.PhotoImage(resized_image)
+
+def on_clear():
+    # Remove all text inside of the input widget
+    input.delete(0, tk.END)
+    # Remove any image inside of the qr-code label
+    qr_code_label.config(
+        image="",
+        compound=None
+    )
+
+    # Add logo to qr-code label
+    qr_code_label.config(image=logo_image, compound="bottom")
+    qr_code_label.image = logo_image
+
+
+def on_save():
+    files = [('PNG Image', '*.png'), ('All Files', '*.*')]
+    file = asksaveasfile(filetypes=files, defaultextension='.png', mode='wb')
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
@@ -112,27 +139,58 @@ window.grid_rowconfigure(5, weight=1)
 row5.grid_columnconfigure(0, weight=1)
 row5.grid_columnconfigure(1, weight=1)
 
+text="QR Codes will appear here:"
+
 # Create label to display QR codes
+logo_image = show_logo()
+
 qr_code_label = tk.Label(
     row5,
     text="QR Codes will appear here:",
+    image=logo_image,
+    compound="bottom",  # image above text
     bg="grey60",
     anchor="n",
     pady=10,
-    font=text_font,
-    width=20,
-    height=12
+    font=text_font
 )
-qr_code_label.grid(row=0, column=0, sticky="nsew")
+qr_code_label.image = logo_image
+qr_code_label.grid(row=0, column=0, sticky="nsew", padx=(20, 0), pady=(20, 20))
 
-#target_height = 140
-#aspect_ratio = pil_image.width / pil_image.height
-#target_width = int(target_height * aspect_ratio)
+# Clear button
+clear_btn = tk.Button(
+    row5,
+    text="Clear",
+    font=button_font,
+    bg="white",
+    fg="black",
+    activebackground="#2E2E2E",
+    activeforeground="white",
+    width=7,
+    height=1,
+    relief="raised",
+    bd=7,
+    cursor="hand2",
+    command=on_clear
+)
+clear_btn.grid(row=0, column=1, sticky="n", pady=40)
 
-#pil_image = pil_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
-#logo_image = ImageTk.PhotoImage(pil_image)
-
-#logo_label = tk.Label(window, image=logo_image, bg="#2E2E2E")
-#logo_label.grid(row=0, column=0, pady=20)
+# Save button
+save_btn = tk.Button(
+    row5,
+    text="Save",
+    font=button_font,
+    bg="white",
+    fg="black",
+    activebackground="#2E2E2E",
+    activeforeground="white",
+    width=7,
+    height=1,
+    relief="raised",
+    bd=7,
+    cursor="hand2",
+    command=on_save
+)
+save_btn.grid(row=0, column=1, sticky="s", pady=50)
 
 window.mainloop()
