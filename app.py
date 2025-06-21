@@ -91,12 +91,32 @@ def on_save():
         current_image.save(file, format='PNG')
         file.close()
 
+def on_library():
+    library = tk.Toplevel(window)
+    library.title("Library")
+    library.geometry("700x500")
+    library.configure(bg="#2E2E2E")
+    library.resizable(False, False)
+
+    text = "📚 Welcome to the library"
+
+    library_greeting = tk.Label(
+        library,
+        text=text,
+        fg="white",
+        bg="#2E2E2E",
+        font=title_font
+    )
+    library_greeting.pack(pady=20)
+    fade_in_label(library_greeting, text)
+
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
         window.after(i * delay, lambda i=i: label.config(text=text[:i+1]))
 
 # Window setup
 window = tk.Tk()
+window.title("QR-Gen")
 window.geometry("700x500")
 window.configure(bg="#2E2E2E")
 window.resizable(False, False)
@@ -168,6 +188,24 @@ generate_btn = tk.Button(
     command=on_generate
 )
 generate_btn.grid(row=4, column=0, pady=20)
+
+# Library button
+library_btn = tk.Button(
+    window,
+    text="library",
+    font=button_font,
+    bg="green2",
+    fg="#2E2E2E",
+    activebackground="green4",
+    activeforeground="white",
+    width=7,
+    height=1,
+    relief="raised",
+    bd=7,
+    cursor="hand2",
+    command=on_library
+)
+library_btn.grid(row=4, column=0, sticky="e", padx=68)
 
 # Add different colour span row
 row5 = tk.Frame(window, bg="#4A90E2")
