@@ -1,4 +1,9 @@
 # qr-gen
 Instantly generate and save QR codes from any text or URL.
 
-Installation and demo comming soon!
+## Demo
+
+Watch a quick preview below (GIF)
+
+### 🔹 Preview (GIF)
+![Architext AI - Preview]()
