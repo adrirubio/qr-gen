@@ -76,7 +76,7 @@ def on_generate():
     data_dir = os.path.join(os.path.expanduser("~"), ".local", "share", "qr-gen", "qr-codes")
     os.makedirs(data_dir, exist_ok=True)
 
-    pattern      = re.compile(r"qr-code-(\d+)\.png$")
+    pattern = re.compile(r"qr-code-(\d+)\.png$")
     highest_idx  = 0
 
     for fname in os.listdir(data_dir):
@@ -85,12 +85,35 @@ def on_generate():
             num = int(m.group(1))
             highest_idx = max(highest_idx, num)
 
-    next_idx  = highest_idx + 1
-    filename  = f"qr-code-{next_idx}.png"
+    next_idx = highest_idx + 1
+    filename = f"qr-code-{next_idx}.png"
     file_path = os.path.join(data_dir, filename)
 
     img.save(file_path, format="PNG")
-    print("Saved to", file_path)
+    print("Saved QR-Code to", file_path)
+
+    # Save qr code link for database
+    data_dir = os.path.join(os.path.expanduser("~"), ".local", "share", "qr-gen", "qr-code-links")
+    os.makedirs(data_dir, exist_ok=True)
+
+    pattern = re.compile(r"link-(\d+)\.txt$")
+    highest_idx  = 0
+
+    for fname in os.listdir(data_dir):
+        m = pattern.match(fname)
+        if m:
+            num = int(m.group(1))
+            highest_idx = max(highest_idx, num)
+
+    next_idx = highest_idx + 1
+    filename = f"link-{next_idx}.txt"
+    file_path = os.path.join(data_dir, filename)
+
+    # Save link to file
+    link = input.get()
+    with open(file_path, "w") as f:
+        f.write(link)
+    print("Saved QR-Code link to", file_path)
 
 def on_clear():
     # Remove all text inside of the input widget
@@ -276,7 +299,7 @@ def on_database():
 def load_image(path):
     qr_code = tk.Toplevel(window)
     qr_code.title("QR-Code")
-    qr_code.geometry("500x300")
+    qr_code.geometry("500x400")
     qr_code.configure(bg="#2E2E2E")
     qr_code.resizable(False, False)
 
@@ -304,7 +327,36 @@ def load_image(path):
         cursor="hand2",
         command=lambda p=path: on_save2(path)
     )
-    save_btn.pack(pady=20)
+    save_btn.pack(anchor="w", padx=70, pady=20)
+
+    # Get link/text path
+    name = Path(path).stem
+    m = re.search(r"-(\d+)$", name)
+    if m:
+        number = int(m.group(1))
+    else:
+        print("no number found")
+
+    path = Path.home() / ".local" / "share" / "qr-gen" / "qr-code-links" / f"link-{number}.txt"
+
+    # Get link/text
+    with path.open("r", encoding="utf-8") as f:
+        text = f.read()
+
+    # Corresponding link/text label
+    qr_code.update_idletasks()
+    wrap = qr_code.winfo_width() - 40
+
+    text_link_label = tk.Label(
+        qr_code,
+        text=f"Corresponding link or text: {text}",
+        fg="white",
+        bg="#2E2E2E",
+        font=text_font,
+        wraplength=wrap,
+        justify="left"
+    )
+    text_link_label.pack(padx=20, pady=10, fill="x")
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
