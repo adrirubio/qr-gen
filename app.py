@@ -331,7 +331,7 @@ def load_image(path):
         cursor="hand2",
         command=lambda p=path: on_save2(path)
     )
-    save_btn.pack(side="left", padx=70)
+    save_btn.pack(side="left", padx=70, pady=20)
 
     # Delete button
     delete_btn = tk.Button(
@@ -347,9 +347,9 @@ def load_image(path):
         relief="raised",
         bd=7,
         cursor="hand2",
-        command=on_delete
+        # command=on_delete
     )
-    delete_btn.pack(side="right", padx=70)
+    delete_btn.pack(side="right", padx=70, pady=20)
 
     # Get link/text path
     name = Path(path).stem
@@ -378,7 +378,7 @@ def load_image(path):
         wraplength=wrap,
         justify="left"
     )
-    text_link_label.pack(pady=50, fill="x")
+    text_link_label.pack(pady=20, fill="x")
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
