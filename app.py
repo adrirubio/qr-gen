@@ -5,8 +5,7 @@ import tkinter.ttk as ttk
 from tkinter.filedialog import asksaveasfile
 from pathlib import Path
 from PIL import Image, ImageTk
-import os, datetime
-import os, re
+import os, datetime, re
 import shutil
 import qrcode
 import random
