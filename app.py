@@ -160,6 +160,27 @@ def on_save2(path):
 
     print("Saved a copy to", Path(file_obj.name))
 
+def on_delete(qr_code_image, qr_code_text, qr_code, database):
+    # Delte qr code file
+    try:
+        os.remove(qr_code_image)
+        print("deleted:", qr_code_image)
+    except FileNotFoundError:
+        print("file not found")
+
+    # Delete qr code text or link
+    try:
+        os.remove(qr_code_text)
+        print("deleted:", qr_code_text)
+    except FileNotFoundError:
+        print("file not found")
+
+    # Reset qr-code and database
+    qr_code.destroy()
+    database.destroy()
+    # Open updated database
+    on_database()
+
 def make_scrollable_grid(parent, cols=3, cell_minwidth=220, bg="#2E2E2E"):
     # Create container frame for proper layout
     container = tk.Frame(parent, bg=bg)
@@ -224,6 +245,7 @@ def make_scrollable_grid(parent, cols=3, cell_minwidth=220, bg="#2E2E2E"):
     return inner, add_item
 
 def on_database():
+    global database
     database = tk.Toplevel(window)
     database.title("Database")
     database.configure(bg="#2E2E2E")
@@ -309,7 +331,7 @@ def load_image(path):
 
     label = tk.Label(qr_code, image=tk_img, bg="#2E2E2E")
     label.image = tk_img
-    label.pack(padx=10, pady=10)
+    label.pack(padx=10, pady=20)
 
     # Button frame
     btn_frame = tk.Frame(qr_code, bg="#2E2E2E")
@@ -333,24 +355,6 @@ def load_image(path):
     )
     save_btn.pack(side="left", padx=70, pady=20)
 
-    # Delete button
-    delete_btn = tk.Button(
-        btn_frame,
-        text="Delete",
-        font=button_font,
-        bg="white",
-        fg="black",
-        activebackground="#2E2E2E",
-        activeforeground="white",
-        width=7,
-        height=1,
-        relief="raised",
-        bd=7,
-        cursor="hand2",
-        # command=on_delete
-    )
-    delete_btn.pack(side="right", padx=70, pady=20)
-
     # Get link/text path
     name = Path(path).stem
     m = re.search(r"-(\d+)$", name)
@@ -359,10 +363,10 @@ def load_image(path):
     else:
         print("no number found")
 
-    path = Path.home() / ".local" / "share" / "qr-gen" / "qr-code-links" / f"link-{number}.txt"
+    text_path = Path.home() / ".local" / "share" / "qr-gen" / "qr-code-links" / f"link-{number}.txt"
 
     # Get link/text
-    with path.open("r", encoding="utf-8") as f:
+    with text_path.open("r", encoding="utf-8") as f:
         text = f.read()
 
     # Corresponding link/text label
@@ -379,6 +383,25 @@ def load_image(path):
         justify="left"
     )
     text_link_label.pack(pady=20, fill="x")
+
+    # Delete button
+    delete_btn = tk.Button(
+        btn_frame,
+        text="Delete",
+        font=button_font,
+        bg="white",
+        fg="black",
+        activebackground="#2E2E2E",
+        activeforeground="white",
+        width=7,
+        height=1,
+        relief="raised",
+        bd=7,
+        cursor="hand2",
+        command=lambda: on_delete(path, text_path, qr_code, database)
+    )
+    delete_btn.pack(side="right", padx=70, pady=20)
+
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
