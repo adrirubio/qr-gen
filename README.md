@@ -13,3 +13,78 @@ Watch a quick preview below (GIF)
 
 ### 🔹 Preview (GIF)
 ![Architext AI - Preview](https://github.com/adrirubio/demo-files/raw/main/demo-qr-gen.gif)
+
+## Installation
+
+### Prerequisites
+- Python 3.8 or higher
+
+### Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/adrirubio/qr-gen.git
+   cd qr-gen
+   ```
+
+2. **Install dependencies**
+
+3. **Run the application**
+   ```bash
+   python app.py
+   ```
+
+### Optional: Global Hotkey Setup (F5)
+
+To launch QR Gen with the f5 key from anywhere on your system:
+
+1. **Start the hotkey daemon**
+   ```bash
+   python hotkey_daemon.py
+   ```
+
+2. **Keep it running in the background**
+   - The daemon will listen for F5 key presses
+   - Press F5 anytime to launch QR Gen
+   - Press Ctrl-C to stop the daemon
+
+3. **Auto-start on boot (Linux)**
+    Add to your startup applications or create a systemd service:
+    ```bash
+    # Create a systemd service file
+    sudo nano /etc/systemd/system/qr-gen-hotkey.service
+    ```
+
+    Add the following content:
+    ```ini
+    [Unit]
+    Description=QR Gen Hotkey Daemon
+    After=graphical.target
+
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/python3 /path/to/qr-gen/hotkey_daemon.py
+    Restart=on-failure
+    User=YOUR_USERNAME
+
+    [Install]
+    WantedBy=default.target
+    ```
+
+    Enable and start service:
+    ```bash
+    sudo systemctl enable qr-gen-hotkey
+    sudo systemctl start qr-gen-hotkey
+    ```
+
+# Usage
+
+1. **Launch the app** using either:
+   - Direct command: `python app.py`
+   - F5 hotkey (if daemon is running)
+
+2. **Enter your text or link** in the entry widget
+
+3. **Get instant QR Codes** with the qrcode library
+
+4. **Find past QR Codes** in the database section
