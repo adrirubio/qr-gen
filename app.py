@@ -137,7 +137,7 @@ def on_save():
         current_image.save(file, format='PNG')
         file.close()
 
-def on_save2(path):
+def on_save2(path, qr_code):
     # Copy the image from the path
     src = Path(path)
     if not src.exists():
@@ -158,6 +158,9 @@ def on_save2(path):
     file_obj.close()
 
     print("Saved a copy to", Path(file_obj.name))
+
+    qr_code.destroy()
+
 
 def on_delete(qr_code_image, qr_code_text, qr_code, database):
     # Delte qr code file
@@ -276,6 +279,15 @@ def on_database():
     database_greeting.pack(pady=20)
     fade_in_label(database_greeting, text)
 
+    clarification = tk.Label(
+        database,
+        text="QR-Codes appear from newest to oldest",
+        fg="white",
+        bg="#2E2E2E",
+        font=text_font
+    )
+    clarification.pack()
+
     gallery_frame, gallery_add = make_scrollable_grid(database)
 
     window.gallery_add = gallery_add
@@ -350,7 +362,7 @@ def load_image(path):
         relief="raised",
         bd=7,
         cursor="hand2",
-        command=lambda p=path: on_save2(path)
+        command=lambda p=path: on_save2(path, qr_code)
     )
     save_btn.pack(side="left", padx=70, pady=20)
 
