@@ -2,7 +2,7 @@
 Instantly generate and save QR codes from any text or URL.
 
 <p align="left">
-  <img scr="qr-gen-logo.png"
+  <img src="qr-gen-logo.png"
        alt="qr-gen-logo"
        width="200">
 </p>
