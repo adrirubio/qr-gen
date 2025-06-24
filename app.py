@@ -183,6 +183,17 @@ def on_delete(qr_code_image, qr_code_text, qr_code, database):
     # Open updated database
     on_database()
 
+def on_copy(window):
+    text = input.get()
+    window.clipboard_clear()
+    window.clipboard_append(text)
+    window.destroy()
+
+def on_paste(window):
+    clipboard = window.clipboard_get()
+    input.insert("insert", clipboard)
+    window.destroy()
+
 def make_scrollable_grid(parent, cols=3, cell_minwidth=220, bg="#2E2E2E"):
     # Create container frame for proper layout
     container = tk.Frame(parent, bg=bg)
@@ -413,6 +424,63 @@ def load_image(path):
     )
     delete_btn.pack(side="right", padx=70, pady=20)
 
+def on_right_click(event):
+    w, h = 200, 100
+    cur_x, cur_y = event.x_root, event.y_root
+    x = cur_x
+    y = cur_y + 20
+
+    # Keep pop up on screen
+    scr_w = window.winfo_screenwidth()
+    scr_h = window.winfo_screenheight()
+    x = max(0, x)
+    y = min(scr_h - h, y)
+
+    click_win = tk.Toplevel(window)
+    click_win.title("Right click")
+    click_win.geometry(f"{w}x{h}+{x}+{y}")
+    click_win.configure(bg="#2E2E2E")
+    click_win.resizable(False, False)
+
+    # Grid
+    click_win.grid_columnconfigure(0, weight=1)
+    click_win.grid_columnconfigure(1, weight=1)
+
+    # Copy button
+    copy_btn = tk.Button(
+        click_win,
+        text="Copy",
+        font=button_font,
+        bg="white",
+        fg="black",
+        activebackground="white",
+        activeforeground="white",
+        width=3,
+        height=1,
+        relief="raised",
+        bd=7,
+        cursor="hand2",
+        command=lambda: on_copy(click_win)
+    )
+    copy_btn.grid(row=0, column=0, pady=30)
+
+    # Paste button
+    paste_btn = tk.Button(
+        click_win,
+        text="Paste",
+        font=button_font,
+        bg="white",
+        fg="black",
+        activebackground="white",
+        activeforeground="white",
+        width=3,
+        height=1,
+        relief="raised",
+        bd=7,
+        cursor="hand2",
+        command=lambda: on_paste(click_win)
+    )
+    paste_btn.grid(row=0, column=1, pady=30)
 
 def fade_in_label(label, text, delay=40):
     for i in range(len(text)):
@@ -472,6 +540,8 @@ input = tk.Entry(
     insertbackground="#2E2E2E"
 )
 input.grid(row=3, column=0, pady=20, ipadx=5, ipady=1)
+
+input.bind("<Button-3>", on_right_click)
 
 # Generate button
 button_font = ("Helvetica", 12, "bold")
