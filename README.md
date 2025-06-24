@@ -111,22 +111,22 @@ To launch QR Gen with the f5 key from anywhere on your system:
 ## Screenshots
 
 Home:
-![Home](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/home.png)
+![Home](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/home.png)
 
 Copy/paste:
-![Copy/paste](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/copy-paste.png)
+![Copy/paste](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/copy-paste.png)
 
 QR Code:
-![QR Code](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/qr-code.png)
+![QR Code](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/qr-code.png)
 
 Save:
-![Save](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/save.png)
+![Save](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/save.png)
 
 Database:
-![Database](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/database.png)
+![Database](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/database.png)
 
 Database QR Code:
-![Database QR Code](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/database-qr-code.png)
+![Database QR Code](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/database-qr-code.png)
 
 Farewell:
-![Farewell](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/goodbye.png)
+![Farewell](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/goodbye.png)
