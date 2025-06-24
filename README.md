@@ -110,23 +110,23 @@ To launch QR Gen with the f5 key from anywhere on your system:
 
 ## Screenshots
 
-Home:
+Home:<br>
 ![Home](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/home.png)
 
-Copy/paste:
+Copy/paste:<br>
 ![Copy/paste](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/copy-paste.png)
 
-QR Code:
+QR Code:<br>
 ![QR Code](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/qr-code.png)
 
-Save:
+Save:<br>
 ![Save](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/save.png)
 
-Database:
+Database:<br>
 ![Database](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/database.png)
 
-Database QR Code:
+Database QR Code:<br>
 ![Database QR Code](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/database-qr-code.png)
 
-Farewell:
+Farewell:<br>
 ![Farewell](https://raw.githubusercontent.com/adrirubio/demo-files/main/qr-gen-screenshots/goodbye.png)
