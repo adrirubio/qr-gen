@@ -4,5 +4,7 @@ qr-gen/
 ├── pyproject.toml
 ├── README.md
 |
+├── requirements.txt
+├── hotkey_daemon.py
 ├── app.py              # Main application file
 └── qr-gen-logo.png     # Application logo
