@@ -94,7 +94,7 @@ To launch QR Gen with the f5 key from anywhere on your system:
     ```bash
     sudo systemctl enable qr-gen-hotkey
     sudo systemctl start qr-gen-hotkey
-```
+    ```
 
 ## Usage
 
