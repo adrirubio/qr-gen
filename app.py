@@ -678,7 +678,7 @@ if closed:
 
     # Fonts
     text_font = tkFont.Font(family="Helvetica", size=14)
-    title_font = tkFont.Font(family="Times", size="23", weight="bold")
+    title_font = tkFont.Font(family="Times", size="22", weight="bold")
 
     message = random.choice(farewells)
 
@@ -712,16 +712,16 @@ if closed:
     logo_label.image = logo_image
     logo_label.pack(pady=20)
 
-    # 1 second
-    one = tk.Label(
+    # 3 seconds
+    three = tk.Label(
         farewell,
-        text="1 second",
+        text="3 seconds",
         bg="#2E2E2E",
         fg="white",
         font=text_font
     )
 
-    farewell.after(1000, lambda: one.pack(pady=20))
+    farewell.after(1000, lambda: three.pack(pady=20))
 
     # 2 seconds
     two = tk.Label(
@@ -732,17 +732,17 @@ if closed:
         font=text_font
     )
 
-    farewell.after(2000, lambda: (one.destroy(), two.pack(pady=20)))
+    farewell.after(2000, lambda: (three.destroy(), two.pack(pady=20)))
 
-    # 3 seconds
-    three = tk.Label(
+    # 1 second
+    one = tk.Label(
         farewell,
-        text="3 seconds",
+        text="1 second",
         bg="#2E2E2E",
         fg="white",
         font=text_font
     )
-    farewell.after(3000, lambda: (two.destroy(), three.pack(pady=20)))
+    farewell.after(3000, lambda: (two.destroy(), one.pack(pady=20)))
 
     # Goodbye seconds
     goodbye = tk.Label(
@@ -752,6 +752,8 @@ if closed:
         fg="white",
         font=text_font
     )
-    farewell.after(4000, lambda: (three.destroy(), goodbye.pack(pady=20), farewell.destroy()))
+    farewell.after(4000, lambda: (one.destroy(), goodbye.pack(pady=20)))
+
+    farewell.after(4500, lambda: farewell.destroy())
 
     farewell.mainloop()
