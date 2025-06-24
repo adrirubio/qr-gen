@@ -9,8 +9,10 @@ import os, datetime, re
 import shutil
 import qrcode
 import random
+import time
 
 current_image = None
+closed = False
 
 # Greeting list
 greetings = [
@@ -31,6 +33,30 @@ greetings = [
     "Hey, let's get this QR party started!",
     "Let the creativity flow!",
 ]
+
+farewells = [
+    "Scanning off-see you at the next code!",
+    "That's a wrap! May your links always load.",
+    "QR-tastic work today-catch you later!",
+    "Goodbye for now; keep spreading those squares.",
+    "Thanks for coding with us-until the next scan.",
+    "Exit complete. Your pixels salute you!",
+    "Logging out: may your URLs stay evergreen.",
+    "So long, creator-stay inspired and encoded.",
+    "Mission accomplished. Time to share your squares!",
+    "The generator sleeps; your QR codes live on.",
+    "All boxed up-see you at the next batch.",
+    "Disconnecting... but your codes are still online.",
+    "Happy scanning! We'll be here when you need more.",
+    "Pixels packed, data delivered. Farewell!",
+    "Thanks for visiting the matrix-until next time.",
+    "Signing off-keep those corners crisp!"
+]
+
+def on_close():
+    global closed
+    closed = True
+    window.destroy()
 
 def show_logo():
     global current_image
@@ -453,7 +479,7 @@ def on_right_click(event):
         font=button_font,
         bg="white",
         fg="black",
-        activebackground="white",
+        activebackground="black",
         activeforeground="white",
         width=3,
         height=1,
@@ -471,7 +497,7 @@ def on_right_click(event):
         font=button_font,
         bg="white",
         fg="black",
-        activebackground="white",
+        activebackground="black",
         activeforeground="white",
         width=3,
         height=1,
@@ -540,7 +566,6 @@ input = tk.Entry(
     insertbackground="#2E2E2E"
 )
 input.grid(row=3, column=0, pady=20, ipadx=5, ipady=1)
-
 input.bind("<Button-3>", on_right_click)
 
 # Generate button
@@ -641,4 +666,92 @@ save_btn = tk.Button(
 )
 save_btn.grid(row=0, column=1, sticky="s", pady=50)
 
+window.protocol("WM_DELETE_WINDOW", on_close)
 window.mainloop()
+
+if closed:
+    farewell = tk.Tk()
+    farewell.title("Goodbye")
+    farewell.geometry("700x500")
+    farewell.configure(bg="#2E2E2E")
+    farewell.resizable(False, False)
+
+    # Fonts
+    text_font = tkFont.Font(family="Helvetica", size=14)
+    title_font = tkFont.Font(family="Times", size="23", weight="bold")
+
+    message = random.choice(farewells)
+
+    # Farewell label
+    farewell_label = tk.Label(
+        farewell,
+        text=message,
+        fg="white",
+        bg="#2E2E2E",
+        font=title_font
+    )
+    farewell_label.pack(pady=20)
+
+    logo_path = Path("qr-gen-logo.png")
+
+    pil_image = Image.open(logo_path).convert("RGBA")
+
+    target_height = 300
+    scale = target_height / pil_image.height
+    target_width = int(pil_image.width * scale)
+
+    resized_image = pil_image.resize((target_width, target_height),
+                                 Image.Resampling.LANCZOS)
+    logo_image = ImageTk.PhotoImage(resized_image)
+
+    logo_label = tk.Label(
+        farewell,
+        image=logo_image,
+        bg="#2E2E2E"
+    )
+    logo_label.image = logo_image
+    logo_label.pack(pady=20)
+
+    # 1 second
+    one = tk.Label(
+        farewell,
+        text="1 second",
+        bg="#2E2E2E",
+        fg="white",
+        font=text_font
+    )
+
+    farewell.after(1000, lambda: one.pack(pady=20))
+
+    # 2 seconds
+    two = tk.Label(
+        farewell,
+        text="2 seconds",
+        bg="#2E2E2E",
+        fg="white",
+        font=text_font
+    )
+
+    farewell.after(2000, lambda: (one.destroy(), two.pack(pady=20)))
+
+    # 3 seconds
+    three = tk.Label(
+        farewell,
+        text="3 seconds",
+        bg="#2E2E2E",
+        fg="white",
+        font=text_font
+    )
+    farewell.after(3000, lambda: (two.destroy(), three.pack(pady=20)))
+
+    # Goodbye seconds
+    goodbye = tk.Label(
+        farewell,
+        text="Goodbye",
+        bg="#2E2E2E",
+        fg="white",
+        font=text_font
+    )
+    farewell.after(4000, lambda: (three.destroy(), goodbye.pack(pady=20), farewell.destroy()))
+
+    farewell.mainloop()
