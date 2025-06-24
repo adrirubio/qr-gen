@@ -14,6 +14,21 @@ Watch a quick preview below (GIF)
 ### 🔹 Preview (GIF)
 ![Architext AI - Preview](https://github.com/adrirubio/demo-files/raw/main/demo-qr-gen.gif)
 
+## Features
+
+#### Core Features
+- Instant QR Code Generation: Generates QR Codes from any text or link instantly
+- Built in Database: Automatically saves all QR Codes generated
+- Save Functionality: Export QR Codes to custom locations as PNG files
+- Global Hotkey Support: Launch the app from anywhere using the F5 key
+- Right-click Copy and Paste: Copy/paste functionality in the input field
+
+#### Database Features:
+- Automatic Storage: Saves qr codes to ~/.local/share/qr-gen/
+- Link Preservation: Stores both the QR image and original text/link
+- Chronological Storage: View QR Codes from latest to oldest
+- Individual QR Management: Open, save, or delete specific QR Cod
+
 ## Installation
 
 ### Prerequisites
@@ -79,9 +94,9 @@ To launch QR Gen with the f5 key from anywhere on your system:
     ```bash
     sudo systemctl enable qr-gen-hotkey
     sudo systemctl start qr-gen-hotkey
-    ```
+```
 
-# Usage
+## Usage
 
 1. **Launch the app** using either:
    - Direct command: `python app.py`
@@ -92,3 +107,26 @@ To launch QR Gen with the f5 key from anywhere on your system:
 3. **Get instant QR Codes** with the qrcode library
 
 4. **Find past QR Codes** in the database section
+
+## Screenshots
+
+Home:
+![Home](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/home.png)
+
+Copy/paste:
+![Copy/paste](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/copy-paste.png)
+
+QR Code:
+![QR Code](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/qr-code.png)
+
+Save:
+![Save](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/save.png)
+
+Database:
+![Database](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/database.png)
+
+Database QR Code:
+![Database QR Code](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/database-qr-code.png)
+
+Farewell:
+![Farewell](https://github.com/adrirubio/demo-files/blob/36f714f56cbabcf36c0f8a756cbecbfa7e319043/qr-gen-screenshots/goodbye.png)
