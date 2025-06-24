@@ -21,7 +21,8 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "qrcode[pil]>=7.0"  # Handles both QR code generation and image processing
+    "qrcode[pil]>=7.0",  # Handles both QR code generation and image processing
+    "pynput>=1.7.0"  # For keyboard monitoring in hotkey daemon
 ]
 
 [project.urls]

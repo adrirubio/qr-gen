@@ -28,6 +28,10 @@ Watch a quick preview below (GIF)
    ```
 
 2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 
 3. **Run the application**
    ```bash
