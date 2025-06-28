@@ -12,7 +12,7 @@ Instantly generate and save QR codes from any text or URL.
 Watch a quick preview below (GIF)
 
 ### 🔹 Preview (GIF)
-![Architext AI - Preview](https://github.com/adrirubio/demo-files/raw/main/demo-qr-gen.gif)
+![QR Gen - Preview](https://github.com/adrirubio/demo-files/raw/main/demo-qr-gen.gif)
 
 ## Features
 
