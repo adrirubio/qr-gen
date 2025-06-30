@@ -98,6 +98,26 @@ To launch QR Gen with the f5 key from anywhere on your system:
 
 ## Usage
 
+### Running in GitHub Codespaces or Headless Environments
+
+If you're running in GitHub Codespaces or a headless environment, you'll need a virtual display:
+
+1. **Option A: Use the DevContainer (Recommended)**
+   - The repository includes a `.devcontainer/devcontainer.json` configuration
+   - When you open in Codespaces, it will automatically set up a desktop environment
+   - Access the GUI at the forwarded port 6080 in your browser
+
+2. **Option B: Use Xvfb manually**
+   ```bash
+   # Install Xvfb
+   sudo apt-get update && sudo apt-get install -y xvfb
+
+   # Run the app with virtual display
+   xvfb-run -a python app.py
+   ```
+
+### Running on Desktop
+
 1. **Launch the app** using either:
    - Direct command: `python app.py`
    - F5 hotkey (if daemon is running)
